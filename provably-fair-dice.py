@@ -40,8 +40,7 @@ class ProvablyFairDice:
         combined_seed = f"{self.player_seed}-{self.server_seed}"
         roll_hash = hashlib.sha256(combined_seed.encode()).hexdigest()
         roll = int(roll_hash[:8], 16) % 100 + 1  # 1-100
-        
-        # Determine win/loss
+
         is_win = (over and roll > target) or (not over and roll < target)
         payout = bet * (99 / (100 - target)) if is_win else 0
         
@@ -66,7 +65,6 @@ class ProvablyFairDice:
         return hashlib.sha256(combined.encode()).hexdigest() == roll_hash
 
 
-# Demo CLI Game
 if __name__ == "__main__":
     game = ProvablyFairDice()
     print("🎲 Provably Fair Dice Game 🎲")
